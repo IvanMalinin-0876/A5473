@@ -1,0 +1,54 @@
+
+
+<head>
+    <link rel="stylesheet" href="./css/booklist.css">
+</head>
+
+
+<body>
+
+
+    <?php
+include("./php/nb_header.php");
+include("./php/DB_connect.php");
+?>
+
+        <div id=" formbook">
+
+            
+
+
+      
+            
+              <div class="row">
+    <div class="col-lg-12">
+      <div class="input-group">
+          
+          <h1>Книги</h1>
+         
+        <input id="search-input" type="text" class="form-control" placeholder="Поиск книги....">
+        <span class="input-group-btn">
+            <button id="search-button" class="btn btn-primary" type="button">Найти</button>
+          </span>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-12">
+      <table id="primary-table" class="greenTable">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+      <script src="./js/script.js">
+            </script>
+
+
+</body>
+
+</html>

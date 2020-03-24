@@ -1,0 +1,39 @@
+
+<head>
+    <link rel="stylesheet" href="./css/booklist.css">
+</head>
+
+<body>
+
+    <?php
+include("./php/nb_header.php");
+include("./php/DB_connect.php");
+  ?>
+        <div id=" formbook">
+            <form id="formAuthor">
+                <fieldset>
+                    <legend>
+                        <h1>Новый автор</h1>
+                    </legend>
+
+                    <p>Ф.И.О. Автора:
+                        <input type="text" name="name" value="">
+
+                        <input type="submit">
+                </fieldset>
+            </form>
+
+            <script>
+                formAuthor.onsubmit = async(e) => {
+                    e.preventDefault();
+                    let response = await fetch('./php/addautor.php', {
+                        method: 'POST',
+                        body: new FormData(formAuthor)
+                    });
+                    alert("Новый автор добавлен  в базу данных ");
+                };
+            </script>
+        </div>
+</body>
+
+</html>

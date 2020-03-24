@@ -1,0 +1,10 @@
+<?php
+
+
+$result = 
+
+echo result;
+
+
+
+?>
