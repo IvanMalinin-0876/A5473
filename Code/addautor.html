@@ -17,21 +17,14 @@ include("./php/DB_connect.php");
                     </legend>
 
                     <p>Ф.И.О. Автора:
-                        <input type="text" name="name" value="">
+                        <input  id="author-input-a" type="text" name="name" value="">
 
-                        <input type="submit">
+                        <input  id="sumbit-button-a"  onclick = "pushbutton()" value="Добавить автора">
                 </fieldset>
             </form>
 
-            <script>
-                formAuthor.onsubmit = async(e) => {
-                    e.preventDefault();
-                    let response = await fetch('./php/addautor.php', {
-                        method: 'POST',
-                        body: new FormData(formAuthor)
-                    });
-                    alert("Новый автор добавлен  в базу данных ");
-                };
+            <script src="./js/addauthor.js">
+              
             </script>
         </div>
 </body>

@@ -17,7 +17,7 @@ session_start();
 <body>
 
 <header class="w3-container w3-teal" style ="background-color: #d04c0c!important;" >
-    <h1> Стек: JS MySql PHP HTML CSS</h1>
+    <h1> Стек: JavaScript Json MySql PHP HTML CSS</h1>
 </header>
 
 <div class="w3-bar w3-border">
@@ -25,7 +25,7 @@ session_start();
     <a href="index.html" class="w3-bar-item w3-button ">Библиотека</a>
     <a href="addbook.html" class="w3-bar-item w3-button ">Добавить Книгу</a>
     <a href="addautor.html" class="w3-bar-item w3-button ">Добавить Автора</a>
-
+    <a href="http://192.168.0.12:8080/phpmyadmin/" class="w3-bar-item w3-button ">БД</a>
     <?php
 
 //$_SESSION['username'] ='test';

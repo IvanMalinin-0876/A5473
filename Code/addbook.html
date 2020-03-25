@@ -29,13 +29,13 @@ include("./php/DB_connect.php");
                         <h1>Новая книга</h1>
                     </legend>
                     <p>Название:
-                        <input type="text" name="name">
+                        <input id="name-input-a" type="text" name="name">
                     </p>
                     <p>Страниц:&nbsp;
-                        <input type="text" name="pageCount">
+                        <input id="pageCount-input-a" type="text" name="pageCount">
                     </p>
                     <p>Автор:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" list="autors" name="author">
+                        <input id="author-input-a" type="text" list="autors" name="author">
                         <!-- ссылаемся на список предопределенных вариантов -->
                     </p>
                     <datalist id="autors"> 
@@ -51,19 +51,11 @@ include("./php/DB_connect.php");
 				?>
 
 				</datalist>
-                    <input type="submit" value="Добавить книгу">
+                    <input id="sumbit-button-a"   value="Добавить книгу"  onclick = "pushbutton()" >
                 </fieldset>
             </form>
 
- <script>
-                formsBooks.onsubmit = async(e) => {
-                    e.preventDefault();
-                    let response = await fetch('./php/addbook.php', {
-                        method: 'POST',
-                        body: new FormData(formsBooks)
-                    });
-                    alert("Новая книга добавлена в базу данных ");
-                };
+            <script   src="./js/addbook.js">
             </script>
 
 

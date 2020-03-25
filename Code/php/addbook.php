@@ -1,14 +1,14 @@
 <?php
-include("./DB_connect.php");
-
-$bn_name = $_POST['name'];
-$pageCount = $_POST['pageCount'];
-$authorId = $_POST['authorId'];
-$author = $_POST['author'];
 
 $auNum;$auName;$sql;
+$bn_name = $_GET['name'];
+$pageCount = $_GET['pageCount'];
+$author = $_GET['author'];
 
-// echo $author; exit;
+include("./DB_connect.php");
+
+
+
 $sql = "SELECT * FROM `Author` where  `name` = '$author' ";
 $result = mysqli_query($dbcon, $sql);	
 while ($row = mysqli_fetch_assoc($result)) {
@@ -25,8 +25,13 @@ $sql = 'INSERT INTO `Book`( `name`, `pageCount`, `authorId`, `author`)'.
 
 }
 
-// echo $sql; exit;
+
+
+
+
 $result = mysqli_query($dbcon, $sql);
-header('Location: .././index.html ');
+
+
+echo "OK";
 
 ?>

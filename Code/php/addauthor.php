@@ -1,11 +1,11 @@
 <?php
 include("./DB_connect.php");
 
-$author = $_POST['author'];
+$author = $_GET['author'];
 $sql = 'INSERT INTO `Author`(  `name`)'.
-' VALUES ('.
-'"'.$author.'")' ;
+' VALUES ('.'"'.$author.'")' ;
 $result = mysqli_query($dbcon, $sql);
-header('Location: .././index.html ');
+
+echo "ok";
 
 ?>
