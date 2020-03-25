@@ -1,46 +1,49 @@
-var bookStore = generateBookStore();
+var auhtorlist = "";
+var authorjson;
+var authorStoreRR;
+getAuthor();
 
-var tableConfig = {
-    headers: ["Номер", "Название", "Количество страниц", "Автор"],
-    rowKeys: ["position", "title", "pages", "author"]
+
+
+var tableConfigR = {
+    headers: ["UAN", "Ф.И.О"],
+    rowKeys: ["position", "author"]
 }
 
-drawTable(bookStore, tableConfig);
 
-
-function shouldPerformSearch(query) {
-    drawTable(searchBooks(query), tableConfig);
+function shouldPerformSearchR(query) {
+    drawTableR(searchAuthor(query), tableConfigR);
 }
 
 
-function beginsWith(s, query) {
+function beginsWithR(s, query) {
     return s.substring(0, query.length) === query;
 }
 
 
-function searchBooks(query) {
+function searchAuthor(query) {
 
-    // If the query is an empty string, we'll return all of the books.
+    // If the query is an empty string, we'll return all of the authors.
     if (query === "") {
-        return bookStore;
+        return authorStoreRR;
     }
 
 
-    function isMatch(book) {
+    function isMatchR(author) {
 
-        return beginsWith(book.title.toLowerCase(), query.toLowerCase());
+        return beginsWithR(author.author.toLowerCase(), query.toLowerCase());
     }
 
-    return filter(bookStore, isMatch);
+    return filter(authorStoreRR, isMatchR);
 }
 
 
-byId("search-button").addEventListener('click', function() {
-    var query = byId("search-input").value; // get the query from the input
-    shouldPerformSearch(query); // call shouldPerformSearch
+byId("search-button-a").addEventListener('click', function() {
+    var query = byId("search-input-a").value; // get the query from the input
+    shouldPerformSearchR(query); // call shouldPerformSearchR
 });
 
-function drawTable(rows, config) {
+function drawTableR(rows, config) {
     var headers = config.headers;
     var rowKeys = config.rowKeys;
 
@@ -51,14 +54,14 @@ function drawTable(rows, config) {
     } else if (!rows || !Array.isArray(rows)) {
         console.error("ERROR: invalid row data. Must be an array!", rows);
     } else {
-        setTableHeader(headers);
-        setTableBody(rows, rowKeys);
+        setTableHeaderR(headers);
+        setTableBodyR(rows, rowKeys);
     }
 }
 
-function setTableHeader(headers) {
+function setTableHeaderR(headers) {
 
-    var tblHead = byId("table-head");
+    var tblHead = byId("table-head-a");
     removeChildren(tblHead);
     var row = elt("tr");
     row.appendChild(elt("th", "#"));
@@ -68,22 +71,22 @@ function setTableHeader(headers) {
     tblHead.appendChild(row);
 }
 
-function setTableBody(books, keys, onClick) {
-    var el = byId("table-body");
+function setTableBodyR(authors, keys, onClick) {
+    var el = byId("table-body-a");
     removeChildren(el);
-    var rows = map(books, function(book, i) {
+    var rows = map(authors, function(author, i) {
         var xs = map(keys, function(k) {
             if (typeof k === "object") {
-                return k.format(book[k.key]);
+                return k.format(author[k.key]);
             }
-            return book[k];
+            return author[k];
         });
 
         var row = makeRow([i + 1].concat(xs));
         if (onClick) {
             row.addEventListener('click', function(evt) {
                 console.log("Clicked row:", row);
-                onClick(book, row, evt);
+                onClick(author, row, evt);
             });
         }
         return row
@@ -101,7 +104,7 @@ function makeRow(entries) {
 
 
 function getTable() {
-    return byId("primary-table")
+    return byId("primary-table-a")
 }
 
 function elt(tag, text, attrs) {
@@ -193,50 +196,54 @@ function filter(list, pred) {
     return result;
 }
 
+function getAuthor() {
+    var str = "";
+    var json = "";
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var respt = this.responseText;
+            auhtorlist = this.responseText;
+            authorjson = JSON.parse(auhtorlist);
+            var authorStoreR = generateAuthorStore();
+            authorStoreRR = authorStoreR;
+            drawTableR(authorStoreR, tableConfigR);
+        }
+    }
+    xmlhttp.open("GET", "./php/getauthor.php?q=" + str, true);
+    xmlhttp.send();
+    return json;
 
-function generateBookStore() {
+}
 
-    var databooks = {
-        "book": [{
-                "id": 1,
-                "name": "werewrewerwer",
-                "pages": 123,
-                "author": "ssdfss"
-            },
-            {
-                "id": 2,
-                "name": "qdvfdsfsd",
-                "pages": 675,
-                "author": "sdfsdf"
-            },
-            {
-                "id": 3,
-                "name": "dfgdfgdg",
-                "pages": 345,
-                "author": "wtrtete"
-            }
-        ]
-    };
+function generateAuthorStore() {
 
-    var bookStore = [];
-  
-    function createBook(data_books) {
+    var dataauthors = authorjson;
+    var authorStoreR = [];
+
+    function createAuthor(data_author) {
 
         return {
-            position:   data_books.id,
-            title:      data_books.name,
-            pages:      data_books.pages,
-            author:     data_books.author
+            position: data_author.id,
+            author: data_author.name,
+
         }
     }
 
-    function createBookStore(arr) {
-        var arg= arr.book;
+    function createAuthorStore(arr) {
+        var arg = arr.author;
         for (var i = 0; i < arg.length; i++) {
-            var bookpart = createBook(arg[i]);
-            bookStore.push(bookpart);
+            var authorpart = createAuthor(arg[i]);
+
+            if (authorpart.name != "") {
+                authorStoreR.push(authorpart);
+            };
         }
-        return bookStore
+        return authorStoreR
     }
-    return createBookStore(databooks);
+    return createAuthorStore(dataauthors);
 }

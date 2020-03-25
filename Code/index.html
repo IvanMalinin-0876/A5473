@@ -1,54 +1,59 @@
-
-
 <head>
     <link rel="stylesheet" href="./css/booklist.css">
 </head>
-
-
 <body>
+    <?php include( "./php/nb_header.php"); ?>
+    <div id=" formbook">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group">
+                     <h1>Книги</h1>
 
-
-    <?php
-include("./php/nb_header.php");
-include("./php/DB_connect.php");
-?>
-
-        <div id=" formbook">
-
-            
-
-
-      
-            
-              <div class="row">
-    <div class="col-lg-12">
-      <div class="input-group">
-          
-          <h1>Книги</h1>
-         
-        <input id="search-input" type="text" class="form-control" placeholder="Поиск книги....">
-        <span class="input-group-btn">
+                    <input id="search-input" type="text" class="form-control" placeholder="Поиск книги  по названию..."> <span class="input-group-btn">
             <button id="search-button" class="btn btn-primary" type="button">Найти</button>
           </span>
-      </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="primary-table" class="greenTable">
+                    <thead id="table-head"></thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+        
+            <script src="./js/listbook.js">
+    </script>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group">
+                     <h1>Авторы</h1>
+
+                    <input id="search-input-a" type="text" class="form-control" placeholder="Поиск автора....."> <span class="input-group-btn">
+            <button id="search-button-a" class="btn btn-primary" type="button">Найти</button>
+          </span>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="primary-table-a" class="greenTable">
+                    <thead id="table-head-a"></thead>
+                    <tbody id="table-body-a"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-lg-12">
-      <table id="primary-table" class="greenTable">
-        <thead id="table-head"></thead>
-        <tbody id="table-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-      <script src="./js/script.js">
-            </script>
-
-
+  
+   <script  src="./js/listauthor.js">
+    </script>
 </body>
 
 </html>
